@@ -9,7 +9,6 @@ Page({
   },
 
   onLoad(options) {
-    console.log(options)
     const industry = decodeURIComponent(options.industry);
     this.setData({ industry });
     this.fetchChartData(industry);
@@ -26,7 +25,7 @@ Page({
       },
       success(res) {
         if (res.statusCode === 200) {
-          const data = res.data.data;
+          const data = res.data.data || res.data;
           // 获取所有日期并排序
           const dates = Object.keys(data).sort();
           // 计算比值：行业数值 / total_money
@@ -37,6 +36,12 @@ Page({
             return industryValue / total;
           });
           self.initChartOption(dates, ratioData);
+        } else {
+          const errMsg = res.data.error || '加载数据失败';
+          wx.showToast({
+            title: errMsg,
+            icon: 'none'
+          });
         }
       }
     });
