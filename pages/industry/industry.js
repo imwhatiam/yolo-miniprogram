@@ -50,7 +50,12 @@ Page({
           data: dates
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+          axisLabel: {
+            formatter: function(value) {
+              return (value * 100).toFixed(2) + '%';
+            }
+          }
         },
         series: [{
           data: ratioData,

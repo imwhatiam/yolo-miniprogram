@@ -35,6 +35,7 @@ Page({
       }
     });
   },
+
   handleIndustryTap(e) {
     const industry = e.currentTarget.dataset.industry;
     console.log(industry)
