@@ -42,3 +42,10 @@
 .table-row:first-child {
   border-top: none;
 }
+
+.footer {
+  text-align: center;
+  margin-top: 40rpx;
+  font-size: 28rpx;
+  color: #999;
+}
