@@ -1,49 +1,38 @@
-// index.js
-const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
-
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {
-      avatarUrl: defaultAvatarUrl,
-      nickName: '',
-    },
-    hasUserInfo: false,
-    canIUseGetUserProfile: wx.canIUse('getUserProfile'),
-    canIUseNicknameComp: wx.canIUse('input.type.nickname'),
+    date: '',
+    industries: [],
   },
-  bindViewTap() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+
+  onLoad() {
+    this.fetchData();
   },
-  onChooseAvatar(e) {
-    const { avatarUrl } = e.detail
-    const { nickName } = this.data.userInfo
-    this.setData({
-      "userInfo.avatarUrl": avatarUrl,
-      hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
-    })
-  },
-  onInputChange(e) {
-    const nickName = e.detail.value
-    const { avatarUrl } = this.data.userInfo
-    this.setData({
-      "userInfo.nickName": nickName,
-      hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
-    })
-  },
-  getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
+
+  fetchData() {
+    const self = this;
+    wx.request({
+      url: 'https://www.lian-yolo.com/stock/api/big-rise-volume/?last_x_days=2',
+      success(res) {
+        if (res.statusCode === 200) {
+          const data = res.data.data;
+          const dates = Object.keys(data);
+          if (dates.length === 0) return;
+          
+          const targetDate = dates[0];
+          const industryData = data[targetDate];
+          
+          // 处理行业数据
+          const industries = Object.entries(industryData)
+            .map(([name, stocks]) => ({ name, count: stocks.length }))
+            .sort((a, b) => b.count - a.count)
+            .slice(0, 5);
+
+          self.setData({
+            date: targetDate,
+            industries,
+          });
+        }
       }
-    })
-  },
-})
+    });
+  }
+});
