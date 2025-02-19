@@ -1,16 +1,18 @@
 <view class="container">
   <!-- 标题 -->
   <view class="title">动量板块</view>
-  
+
   <!-- 表格 -->
   <view class="table">
     <!-- 表头 -->
     <view class="table-header">{{date}}</view>
-    
+
     <!-- 表格内容 -->
     <view class="table-body">
       <block wx:for="{{industries}}" wx:key="name">
-        <view class="table-row">{{item.name}}</view>
+        <view class="table-row" bindtap="handleIndustryTap" data-industry="{{item.name}}">
+          {{item.name}}
+        </view>
       </block>
     </view>
   </view>

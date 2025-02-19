@@ -17,10 +17,10 @@ Page({
           const data = res.data.data;
           const dates = Object.keys(data);
           if (dates.length === 0) return;
-          
+
           const targetDate = dates[0];
           const industryData = data[targetDate];
-          
+
           // 处理行业数据
           const industries = Object.entries(industryData)
             .map(([name, stocks]) => ({ name, count: stocks.length }))
@@ -34,5 +34,12 @@ Page({
         }
       }
     });
-  }
+  },
+  handleIndustryTap(e) {
+    const industry = e.currentTarget.dataset.industry;
+    console.log(industry)
+    wx.navigateTo({
+      url: `/pages/industry/industry?industry=${encodeURIComponent(industry)}`
+    });
+  },
 });
