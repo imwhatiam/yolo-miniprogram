@@ -1,0 +1,4 @@
+<view class="container">
+  <view class="title">【{{industry}}】交易拥挤度</view>
+  <ec-canvas ec="{{ec}}" style="width: 100%; height: 70vh"></ec-canvas>
+</view>

@@ -1,62 +1,51 @@
-/**index.wxss**/
-page {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-.scrollarea {
-  flex: 1;
-  overflow-y: hidden;
+.container {
+  padding: 20rpx;
 }
 
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #aaa;
-  width: 80%;
+.title {
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: bold;
+  margin: 40rpx 0;
+  color: #333;
 }
 
-.userinfo-avatar {
+.table {
+  border: 2rpx solid #e5e5e5;
+  border-radius: 16rpx;
   overflow: hidden;
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.usermotto {
-  margin-top: 200px;
-}
-
-.avatar-wrapper {
-  padding: 0;
-  width: 56px !important;
-  border-radius: 8px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-
-.avatar {
-  display: block;
-  width: 56px;
-  height: 56px;
-}
-
-.nickname-wrapper {
-  display: flex;
+  margin: 0 30rpx;
   width: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-  border-top: .5px solid rgba(0, 0, 0, 0.1);
-  border-bottom: .5px solid rgba(0, 0, 0, 0.1);
-  color: black;
 }
 
-.nickname-label {
-  width: 105px;
+.table-header {
+  background-color: #f8f8f8;
+  padding: 28rpx 32rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
 }
 
-.nickname-input {
-  flex: 1;
+.table-body {
+  background-color: #fff;
+}
+
+.table-row {
+  padding: 28rpx 32rpx;
+  font-size: 30rpx;
+  color: #666;
+  border-top: 2rpx solid #e5e5e5;
+  text-align: center;
+}
+
+.table-row:first-child {
+  border-top: none;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 40rpx;
+  font-size: 28rpx;
+  color: #999;
 }

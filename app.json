@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/industry/industry"
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "动量板块*交易拥挤度",
     "navigationBarBackgroundColor": "#ffffff"
   },
   "style": "v2",
