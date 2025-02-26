@@ -1,15 +1,13 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/activity_create/activity_create",
+    "pages/activity_detail/activity_detail"
   ],
   "window": {
+    "homeButton": true,
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "Yolo",
     "navigationBarBackgroundColor": "#ffffff"
-  },
-  "style": "v2",
-  "componentFramework": "glass-easel",
-  "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  }
 }

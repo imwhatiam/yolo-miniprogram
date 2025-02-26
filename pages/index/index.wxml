@@ -1,27 +1,18 @@
-<!--index.wxml-->
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
+<view class="container">
+  <view class="activity-list">
+    <block wx:for="{{activities}}" wx:key="index">
+      <view class="list-item">
+        <view class="content" bindtap="navigateToActivity" data-index="{{index}}">
+          <text class="name">{{item.activityName}}</text>
+          <text class="count">{{item.completedCount}}/{{item.deletedCount}}/{{item.activityItems.length}}</text>
         </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
-    </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
-    </view>
+        <view class="action">
+          <button class="delete-btn" bindtap="deleteActivity" data-index="{{index}}">删除</button>
+        </view>
+      </view>
+    </block>
   </view>
-</scroll-view>
+  <view class="bottom-view">
+    <button class="create-save-update-btn" bindtap="createNewActivity">+ 新建活动/事项</button>
+  </view>
+</view>

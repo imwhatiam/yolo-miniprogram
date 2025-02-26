@@ -1,0 +1,58 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding-bottom: 20px;
+  transition: all 0.3s ease;
+}
+.name-input {
+  color: #333;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+.name-display {
+  color: #333;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-align: center;
+  /* 重置 view 默认的内边距和行高，确保与 input 一致 */
+  padding: 0;
+  margin: 0;
+  line-height: 22px;
+}
+
+.activity-item-list {
+  margin: 20px 0;
+  margin-bottom: 130px;
+}
+
+.list-item.completed {
+  background: #8FBC8F;
+}
+.list-item.deleted {
+  background: #F08080;
+}
+.list-item.completed .item-text {
+  color: #4CAF50;
+  text-decoration: line-through;
+}
+.list-item.deleted .item-text {
+  color: #af4c4c;
+  text-decoration: line-through;
+}
+
+.bottom-view input {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 15px;
+  margin: 20px;
+  transition: border-color 0.3s ease;
+  text-align: center;
+}
+.bottom-view input:focus {
+  border-color: #4CAF50;
+}

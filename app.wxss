@@ -1,10 +1,91 @@
-/**app.wxss**/
 .container {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
+  padding: 20px;
 } 
+
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px; /* 固定宽度 */
+  padding: 12px;
+  margin: 10px auto; /* 居中显示 */
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+.item-text {
+  flex: 1;
+  margin: 0 15px;
+  font-size: 18px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.create-save-update-btn {
+  background: #4CAF50;
+  color: white;
+  margin: 20px;
+  border-radius: 8px;
+}
+.create-save-update-btn:hover {
+  opacity: 0.9;
+}
+
+.delete-btn {
+  background: #F44336;
+  color: white;
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+.delete-btn:hover {
+  opacity: 0.9;
+}
+
+.complete-btn {
+  background: #4CAF50;
+  color: white;
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+.complete-btn:hover {
+  opacity: 0.9;
+}
+
+.add-participant {
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background: rgba(255,255,255,0.95);
+   padding: 15px 20px;
+   box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+   backdrop-filter: blur(8px);
+ }
+.bottom-view {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+}
+
+button {
+  transition: all 0.2s ease;
+  transform: translateZ(0);
+}
+button:active {
+  transform: scale(0.96);
+  opacity: 0.9;
+}

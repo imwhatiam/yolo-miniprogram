@@ -1,49 +1,73 @@
-// index.js
-const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
-
 Page({
+
+  onShareTimeline: function () {
+    return {
+      title: '活动签到/待办事项',
+    };
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '活动签到/待办事项',
+      path: '/pages/index/index'
+    };
+  },
+
   data: {
-    motto: 'Hello World',
-    userInfo: {
-      avatarUrl: defaultAvatarUrl,
-      nickName: '',
-    },
-    hasUserInfo: false,
-    canIUseGetUserProfile: wx.canIUse('getUserProfile'),
-    canIUseNicknameComp: wx.canIUse('input.type.nickname'),
+    activities: [],
   },
-  bindViewTap() {
+
+  onShow() {
+    this.loadActivities()
+  },
+
+  loadActivities() {
+    const activities = wx.getStorageSync('activities') || []
+    const result = activities.map(activity => {
+      const deletedCount = activity.activityItems.reduce((count, subItem) => {
+        return subItem.deleted ? count + 1 : count;
+      }, 0);
+
+      const completedCount = activity.activityItems.reduce((count, subItem) => {
+        return subItem.completed ? count + 1 : count;
+      }, 0);
+
+      return {
+        ...activity,
+        deletedCount,
+        completedCount
+      };
+    });
+    this.setData({ activities: result })
+  },
+
+  navigateToActivity(e) {
+    const index = e.currentTarget.dataset.index
     wx.navigateTo({
-      url: '../logs/logs'
+      url: `/pages/activity_detail/activity_detail?index=${index}`
     })
   },
-  onChooseAvatar(e) {
-    const { avatarUrl } = e.detail
-    const { nickName } = this.data.userInfo
-    this.setData({
-      "userInfo.avatarUrl": avatarUrl,
-      hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
+
+  createNewActivity() {
+    wx.navigateTo({
+      url: '/pages/activity_create/activity_create'
     })
   },
-  onInputChange(e) {
-    const nickName = e.detail.value
-    const { avatarUrl } = this.data.userInfo
-    this.setData({
-      "userInfo.nickName": nickName,
-      hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
-    })
-  },
-  getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
+
+  deleteActivity(e) {
+    const activities = wx.getStorageSync('activities')
+    const index = e.currentTarget.dataset.index
+    const name = activities[index].activityName
+    wx.showModal({
+      title: '确认删除',
+      content: '确定要删除 ' + name + ' 吗？',
+      success: res => {
+        if (res.confirm) {
+          activities.splice(index, 1)
+          wx.setStorageSync('activities', activities)
+          this.loadActivities()
+          wx.showToast({ title: '删除成功', icon: 'success' })
+        }
       }
     })
-  },
+  }
 })

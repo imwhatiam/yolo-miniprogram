@@ -1,0 +1,23 @@
+.input-group {
+  margin: 20px 0;
+}
+.name-input {
+  flex: 1;
+  border-bottom: 1px solid #eee; /* 保持原颜色 */
+  padding: 12px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 16px;
+  outline: none;
+}
+.items-input {
+  height: 400px;
+  width: 300px;
+  padding: 12px;
+  text-align: center;
+  white-space: pre-line;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #f8f8f8;
+  overflow-y: auto;
+}
