@@ -27,7 +27,7 @@
       </view>
       <view wx:else class="list-item">
         <button class="complete-btn" bindtap="handleCompleteItem" data-index="{{index}}">完成</button>
-        <text class="item-text">{{index+1}}, {{item.itemName}}</text>
+        <text class="item-text" bindlongpress="showFullText" bindtouchend="hideFullText">{{index+1}}, {{item.itemName}}</text>
         <button class="delete-btn" bindtap="handleDeleteItem" data-index="{{index}}">删除</button>
       </view>
     </block>

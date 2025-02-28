@@ -17,7 +17,8 @@ Page({
     activityName: '',
     activityItems: [],
     isEditingActivityName: false,
-    newItemName: ''
+    newItemName: '',
+    showFullText: false
   },
 
   onLoad(options) {
@@ -66,6 +67,15 @@ Page({
     wx.setStorageSync('activities', activities);
 
     this.setData({ isEditingActivityName: false });
+  },
+
+  showFullText(e) {
+    console.log('show full')
+    this.setData({showFullText: true});
+  },
+  hideFullText(e) {
+    console.log('hide full')
+    this.setData({showFullText: false});
   },
 
   handleCompleteItem(e) {
