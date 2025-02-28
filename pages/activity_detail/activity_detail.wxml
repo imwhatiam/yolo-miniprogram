@@ -27,8 +27,10 @@
       </view>
       <view wx:else class="list-item">
         <button class="complete-btn" bindtap="handleCompleteItem" data-index="{{index}}">完成</button>
-        <text class="item-text" bindlongpress="showFullText" bindtouchend="hideFullText">{{index+1}}, {{item.itemName}}</text>
-        <button class="delete-btn" bindtap="handleDeleteItem" data-index="{{index}}">删除</button>
+        <text class="{{showFullTextIndex===index ? 'item-full-text' : 'item-text'}}" bindlongpress="showFullText" bindtouchend="hideFullText" data-index="{{index}}">{{index+1}}, {{item.itemName}}</text>
+        <block wx:if="{{showFullTextIndex!==index}}">
+          <button class="delete-btn" bindtap="handleDeleteItem" data-index="{{index}}">删除</button>
+        </block>
       </view>
     </block>
   </view>

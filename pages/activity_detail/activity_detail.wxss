@@ -28,7 +28,6 @@
   margin: 20px 0;
   margin-bottom: 130px;
 }
-
 .list-item.completed {
   background: #8FBC8F;
 }

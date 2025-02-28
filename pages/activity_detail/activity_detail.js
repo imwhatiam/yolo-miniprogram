@@ -18,7 +18,7 @@ Page({
     activityItems: [],
     isEditingActivityName: false,
     newItemName: '',
-    showFullText: false
+    showFullTextIndex: ''
   },
 
   onLoad(options) {
@@ -70,12 +70,11 @@ Page({
   },
 
   showFullText(e) {
-    console.log('show full')
-    this.setData({showFullText: true});
+    const index = e.currentTarget.dataset.index;
+    this.setData({showFullTextIndex: index});
   },
-  hideFullText(e) {
-    console.log('hide full')
-    this.setData({showFullText: false});
+  hideFullText() {
+    this.setData({showFullTextIndex: ''});
   },
 
   handleCompleteItem(e) {
