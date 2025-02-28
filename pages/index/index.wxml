@@ -13,6 +13,6 @@
     </block>
   </view>
   <view class="bottom-view">
-    <button class="create-save-update-btn" bindtap="createNewActivity">+ 新建活动/事项</button>
+    <button class="create-save-update-btn" bindtap="createNewActivity">新建</button>
   </view>
 </view>
