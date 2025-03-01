@@ -1,28 +1,42 @@
+<!-- index.wxml -->
 <view class="container">
+  <!-- 头部区域 -->
   <view class="header">
     <text class="title">我的任务清单</text>
   </view>
 
+  <!-- 任务列表 -->
   <view class="task-list">
     <block wx:for="{{tasks}}" wx:key="id">
-      <view class="task-item" data-id="{{item.id}}">
+      <!-- 单个任务容器 -->
+      <view class="task-item {{item.completed ? 'completed' : ''}} {{item.isDeleted ? 'deleted' : ''}}" data-id="{{item.id}}">
+        
+        <!-- 已删除状态 -->
         <block wx:if="{{item.isDeleted}}">
           <view class="deleted-task">
-            <text>{{item.title}}（已删除）</text>
-            <button data-id="{{item.id}}" bindtap="confirmTaskDelete">彻底删除</button>
-            <button data-id="{{item.id}}" bindtap="cancelTaskDelete">取消删除</button>
+            <text class="task-title">{{item.title}}（已删除）</text>
+            <view class="action-buttons">
+              <button data-id="{{item.id}}" bindtap="confirmTaskDelete">彻底删除</button>
+              <button data-id="{{item.id}}" bindtap="cancelTaskDelete">取消删除</button>
+            </view>
           </view>
         </block>
 
+        <!-- 正常状态 -->
         <block wx:else>
           <view class="task-normal">
+            <!-- 任务头部 -->
             <view class="task-header">
+              <!-- 左侧复选框 -->
               <view class="fixed-left">
-                <checkbox data-id="{{item.id}}" checked="{{item.completed}}" bindchange="toggleMainTask"></checkbox>
+                <checkbox checked="{{item.completed}}" 
+                         data-id="{{item.id}}"
+                         bindchange="toggleMainTask"/>
               </view>
 
+              <!-- 中间内容区域 -->
               <view class="auto-width-content">
-                <text class="task-title">{{item.title}}</text>
+                <text class="task-title {{item.completed ? 'completed' : ''}}">{{item.title}}</text>
                 <view class="progress-container">
                   <view class="progress-bar">
                     <view class="progress" style="width: {{item.progress}}%;"></view>
@@ -30,6 +44,7 @@
                 </view>
               </view>
 
+              <!-- 右侧操作按钮 -->
               <view class="fixed-right">
                 <button class="icon-btn" data-id="{{item.id}}" bindtap="toggleExpand">
                   {{item.expanded ? "▲" : "▼"}}
@@ -38,33 +53,45 @@
               </view>
             </view>
 
+            <!-- 展开的子任务 -->
             <block wx:if="{{item.expanded}}">
               <view class="subtask-list">
                 <block wx:for="{{item.subTasks}}" wx:key="id">
-                  <view class="subtask-item">
+                  <!-- 子任务项 -->
+                  <view class="subtask-item {{subitem.completed ? 'completed' : ''}} {{subitem.isDeleted ? 'deleted' : ''}}">
                     <block wx:if="{{subitem.isDeleted}}">
                       <view class="deleted-subtask">
-                        <checkbox disabled="{{true}}" checked="{{subitem.completed}}"></checkbox>
                         <text>{{subitem.title}}（已删除）</text>
-                        <button data-task-id="{{item.id}}" data-subid="{{subitem.id}}" bindtap="confirmSubTaskDelete">彻底删除</button>
-                        <button data-task-id="{{item.id}}" data-subid="{{subitem.id}}" bindtap="cancelSubTaskDelete">取消删除</button>
+                        <view class="action-buttons">
+                          <button data-task-id="{{item.id}}" 
+                                 data-subid="{{subitem.id}}" 
+                                 bindtap="confirmSubTaskDelete">彻底删除</button>
+                          <button data-task-id="{{item.id}}" 
+                                 data-subid="{{subitem.id}}" 
+                                 bindtap="cancelSubTaskDelete">取消删除</button>
+                        </view>
                       </view>
                     </block>
 
+                    <!-- 正常子任务 -->
                     <block wx:else>
                       <view class="subtask-normal">
                         <checkbox checked="{{subitem.completed}}"
-                          data-task-id="{{item.id}}"
-                          data-subid="{{subitem.id}}"
-                          bindchange="toggleSubTask"></checkbox>
-                        <text>{{subitem.title}}</text>
-                        <button data-task-id="{{item.id}}" data-subid="{{subitem.id}}" bindtap="markSubTaskDelete">删除</button>
+                                 data-task-id="{{item.id}}"
+                                 data-subid="{{subitem.id}}"
+                                 bindchange="toggleSubTask"/>
+                        <text class="{{subitem.completed ? 'completed' : ''}}">{{subitem.title}}</text>
+                        <button class="sub-delete-btn" 
+                               data-task-id="{{item.id}}" 
+                               data-subid="{{subitem.id}}" 
+                               bindtap="markSubTaskDelete">删除</button>
                       </view>
                     </block>
                   </view>
                 </block>
               </view>
               
+              <!-- 新增子任务输入 -->
               <view class="new-subtask">
                 <input placeholder="新增子任务" 
                       data-id="{{item.id}}" 
@@ -79,7 +106,8 @@
     </block>
   </view>
 
+  <!-- 底部添加按钮 -->
   <view class="footer">
-    <button class="add-btn" bindtap="goToAddTask">添加任务</button>
+    <button class="add-btn" bindtap="goToAddTask">＋ 添加任务</button>
   </view>
 </view>
