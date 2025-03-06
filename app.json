@@ -1,10 +1,13 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/addTask/addTask"
+    "pages/activity_list/activity_list",
+    "pages/activity_create/activity_create",
+    "pages/activity_detail/activity_detail"
   ],
   "window": {
-    "navigationBarTitleText": "我的任务清单",
+    "homeButton": true,
+    "navigationBarTitleText": "Yolo",
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black"
   }
