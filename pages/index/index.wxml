@@ -15,12 +15,12 @@
         <view class="item-content">
           <text bindtap="navigateToIndexPage" data-itemid="{{item.id}}">{{item.title}}</text>
           <block wx:if="{{item.items.length !== 0}}">
-            <view 
-              class="arrow-btn"
-              bindtap="toggleExpand"
-              data-index="{{index}}"
-            >
+            <view class="arrow-btn" bindtap="toggleExpand" data-index="{{index}}" >
             {{item.isExpanded ? '▲' : '▼'}}
+            </view>
+          </block>
+          <block wx:else>
+            <view class="arrow-btn">
             </view>
           </block>
         </view>
